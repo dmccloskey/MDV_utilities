@@ -728,9 +728,9 @@ class mass_isotopomer_distributions():
                 fragment_masses = [k for k in peakSpectrum_copy_I[frag].keys()];
                 corrected_spec = {};
                 for i,mass in enumerate(masses_rounded):
-                    corrected = 0.0;
                     if mass in fragment_masses:
                         corrected = peakSpectrum_copy_I[frag][mass];
+                    if not corrected: corrected = 0.0;
                     corrected_spec[masses[i]] = corrected;
                     intensityList.append(corrected);
                 peakSpectrum_corrected[frag] = corrected_spec;
