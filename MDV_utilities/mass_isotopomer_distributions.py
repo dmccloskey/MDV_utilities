@@ -1,5 +1,6 @@
 from molmass.molmass import Formula
 
+from scipy.stats import mode
 import numpy
 import re
 
@@ -1058,11 +1059,14 @@ class mass_isotopomer_distributions():
 
         return peakSpectrum_normalized_O_max
     def calculate_fragmentSpectrumAccuracy(self, peakSpectrum_normalized_list_I):
-        '''calculate the accuracy from the normalized intensity'''
-        # Input:
-        #   peakSpectrum_normalized_list_I = [{fragment:{mass:intensity}}]
-        # Output:
-        #   peakSpectrum_accuracy_O = {fragment:float};
+        '''calculate the accuracy from the normalized intensity
+        Method:
+        spectrum accuracy = mean(abs(measured,a-theoretical,a),...) for all masses of a in the spectrum
+        Input:
+        peakSpectrum_normalized_list_I = [{fragment:{mass:intensity}}]
+        Output:
+        peakSpectrum_accuracy_O = {fragment:float};
+        '''
 
         fragments_I = list(peakSpectrum_normalized_list_I[0].keys());
         peakSpectrum_theoretical = self.report_fragmentSpectrum_normMax(fragments_I,True);
@@ -1110,11 +1114,14 @@ class mass_isotopomer_distributions():
 
         return peakSpectrum_accuracy_O;
     def calculate_fragmentSpectrumAccuracy_normSum(self, peakSpectrum_normalized_list_I):
-        '''calculate the accuracy from the normalized intensity'''
-        # Input:
-        #   peakSpectrum_normalized_list_I = [{fragment:{mass:intensity}}]
-        # Output:
-        #   peakSpectrum_accuracy_O = {fragment:float};
+        '''calculate the accuracy from the normalized intensity
+        Method:
+        spectrum accuracy = mean(abs(measured,a-theoretical,a),...) for all masses of a in the spectrum
+        Input:
+        peakSpectrum_normalized_list_I = [{fragment:{mass:intensity}}]
+        Output:
+        peakSpectrum_accuracy_O = {fragment:float};
+        '''
 
         fragments_I = list(peakSpectrum_normalized_list_I[0].keys());
         peakSpectrum_theoretical = self.report_fragmentSpectrum_normSum(fragments_I,True);
